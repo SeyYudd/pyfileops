@@ -1,67 +1,141 @@
-============================================================
-           FILE MANAGEMENT TOOLKIT (PYTHON)
-============================================================
-Author: Muhamad Syifa (QA & Design Enthusiast)
-Version: 1.0 - 2026
-------------------------------------------------------------
+FILE MANAGEMENT TOOLKIT - CONTOH PERINTAH
+Ganti "D:\Folder\Target" dengan path folder kamu sendiri.
+Tips: selalu coba --dry-run dulu biar aman.
 
-[ IMAGE OF FILE ORGANIZATION SYSTEM FLOWCHART ]
+==============================merge_pdfs_images==============================
+gabung semua PDF & gambar jadi 1 file PDF
+1. # tanya folder dulu (interaktif)
+python "merge_pdfs_images.py"
+2. # langsung kasih path-nya
+python "merge_pdfs_images.py" "D:\Folder\Target"
 
-[ MAIN SCRIPT: MERGE PDF & IMAGES ]
-Menggabungkan PDF dan Gambar (JPG, PNG, WEBP) menjadi 1 PDF.
-- Output: "merge YYYYMMDD - HH-MM.pdf"
-- Jalankan: python merge_pdfs_images.py "C:\path\folder"
+==============================file_prefixer==============================
+tambah kata di depan nama file  ->  Anggur.png jadi Rapat_Anggur.png
+1. # tanya folder & prefix (interaktif)
+python "file_prefixer.py"
+2. # langsung kasih folder + prefix-nya
+python "file_prefixer.py" "D:\Folder\Target" "Rapat_"
+3. # pakai flag
+python "file_prefixer.py" --path "D:\Folder\Target" --prefix "Rapat_"
 
-------------------------------------------------------------
-[ UTILITY SCRIPTS: MANAJEMEN FILE ]
-------------------------------------------------------------
+==============================file_suffixer==============================
+tambah kata di belakang nama file  ->  Anggur.png jadi Anggur_v1.png
+1. # tanya folder & suffix (interaktif)
+python "file_suffixer.py"
+2. # langsung kasih folder + suffix-nya
+python "file_suffixer.py" "D:\Folder\Target" "_v1"
+3. # pakai flag
+python "file_suffixer.py" --path "D:\Folder\Target" --suffix "_v1"
 
-1. file_prefixer.py  -> Tambah kata di AWAL nama file.
-   Contoh: Anggur.png -> Rapat_Anggur.png
+==============================group_by_type==============================
+sortir file ke folder otomatis: Images, Documents, Archives, Apps, Others
+1. # tanya folder (interaktif)
+python "group_by_type.py"
+2. # langsung kasih path-nya
+python "group_by_type.py" "D:\Folder\Target"
+3. # pakai flag
+python "group_by_type.py" --path "D:\Folder\Target"
 
-2. file_suffixer.py  -> Tambah kata di AKHIR (sebelum ekstensi).
-   Contoh: Anggur.png -> Anggur_v1.png
-
-3. group_by_type.py  -> Sortir file otomatis ke folder:
-   (Images, Documents, Archives, Apps, Others).
-
-4. group_by_text.py  -> Masukkan file ke folder berdasarkan 
-   KATA KUNCI yang ada di nama filenya.
-
-5. rename_by_text.py -> Ganti kata tertentu secara massal.
-   Contoh: Cari "Draft", ganti jadi "Final".
-
-6. delete_by_text.py -> HAPUS file yang mengandung kata tertentu.
-   *Gunakan --dry-run untuk simulasi (aman).*
-
-------------------------------------------------------------
-[ CONTOH PERINTAH (POWERSHELL/CMD) ]
-------------------------------------------------------------
-
-# Rename massal:
-python "file_prefixer.py" "D:\Folder\Target" "Prefix_"
-
-# Sortir berdasarkan kata kunci:
+==============================group_by_text==============================
+pindah file yang namanya ada kata kunci ke subfolder baru
+1. # tanya folder & kata kunci (interaktif)
+python "group_by_text.py"
+2. # langsung kasih folder + kata kunci
 python "group_by_text.py" "D:\Folder\Target" "Project_A"
+3. # pakai flag
+python "group_by_text.py" --path "D:\Folder\Target" --keyword "Project_A"
 
-# Simulasi hapus (tanpa benar-benar menghapus):
-python "delete_by_text.py" "D:\Folder\Target" "temp" --dry-run
+==============================rename_by_text==============================
+ganti kata tertentu di nama file  ->  Draft_Laporan.pdf jadi Final_Laporan.pdf
+1. # tanya semua input (interaktif)
+python "rename_by_text.py"
+2. # langsung kasih folder + kata lama + kata baru
+python "rename_by_text.py" "D:\Folder\Target" "Draft" "Final"
+3. # pakai flag
+python "rename_by_text.py" --path "D:\Folder\Target" --old "Draft" --new "Final"
+4. # preview dulu tanpa rename beneran
+python "rename_by_text.py" --path "D:\Folder\Target" --old "Draft" --new "Final" --dry-run
+5. # langsung eksekusi tanpa konfirmasi
+python "rename_by_text.py" --path "D:\Folder\Target" --old "Draft" --new "Final" --yes
 
-------------------------------------------------------------
-[ TIPS ]
-- Gunakan "" (tanda kutip) jika folder/file mengandung spasi.
-- Selalu backup data sebelum melakukan operasi massal.
-- Cek 'requirements.txt' untuk library yang dibutuhkan.
-============================================================
+==============================delete_by_text==============================
+hapus file yang namanya mengandung kata kunci
+1. # tanya folder & kata kunci (interaktif)
+python "delete_by_text.py"
+2. # langsung kasih folder + kata kunci
+python "delete_by_text.py" "D:\Folder\Target" "temp"
+3. # pakai flag
+python "delete_by_text.py" --path "D:\Folder\Target" --keyword "temp"
+4. # preview dulu tanpa hapus beneran
+python "delete_by_text.py" --path "D:\Folder\Target" --keyword "temp" --dry-run
+5. # langsung hapus tanpa konfirmasi
+python "delete_by_text.py" --path "D:\Folder\Target" --keyword "temp" --yes
 
-------------------------------------------------------------
-[ ADDITIONAL UTILITIES ]
-------------------------------------------------------------
-
-# Hapus folder kosong (dry-run / confirm):
-python "delete_empty_folders.py" --path "D:\Folder\Target" --dry-run
-python "delete_empty_folders.py" "D:\Folder\Target"
-
-# Hapus file berdasarkan ukuran (KB) (dry-run / confirm):
-python "delete_by_size.py" --path "D:\Folder\Target" --min 0 --max 10 --dry-run
+==============================delete_by_size==============================
+hapus file berdasarkan rentang ukuran (KB)
+1. # tanya semua input (interaktif)
+python "delete_by_size.py"
+2. # langsung kasih folder + ukuran min & max (KB)
 python "delete_by_size.py" "D:\Folder\Target" 0 10
+3. # pakai flag
+python "delete_by_size.py" --path "D:\Folder\Target" --min 0 --max 10
+4. # preview dulu
+python "delete_by_size.py" --path "D:\Folder\Target" --min 0 --max 10 --dry-run
+5. # langsung hapus tanpa konfirmasi
+python "delete_by_size.py" --path "D:\Folder\Target" --min 0 --max 10 --yes
+
+==============================delete_empty_folders==============================
+hapus subfolder yang kosong
+1. # tanya folder (interaktif)
+python "delete_empty_folders.py"
+2. # langsung kasih path-nya
+python "delete_empty_folders.py" "D:\Folder\Target"
+3. # preview dulu
+python "delete_empty_folders.py" --path "D:\Folder\Target" --dry-run
+4. # langsung hapus tanpa konfirmasi
+python "delete_empty_folders.py" --path "D:\Folder\Target" --yes
+
+==============================rename_sequential==============================
+rename file jadi urutan nomor  ->  001.jpg, 002.jpg, 003.jpg
+opsi: --prefix (nama depan), --start (nomor awal), --digits (panjang angka), --ext (filter ekstensi), --new-ext (ganti ekstensi)
+1. # tanya folder (interaktif)
+python "rename_sequential.py"
+2. # langsung kasih path-nya
+python "rename_sequential.py" "D:\Folder\Target"
+3. # kasih prefix + padding 3 digit
+python "rename_sequential.py" --path "D:\Folder\Target" --prefix "FOTO_" --digits 3
+4. # mulai dari nomor 5
+python "rename_sequential.py" --path "D:\Folder\Target" --prefix "DOC_" --start 5
+5. # filter cuma file .jpg
+python "rename_sequential.py" --path "D:\Folder\Target" --prefix "IMG_" --ext jpg
+6. # preview dulu
+python "rename_sequential.py" --path "D:\Folder\Target" --prefix "FOTO_" --dry-run
+7. # langsung tanpa konfirmasi
+python "rename_sequential.py" --path "D:\Folder\Target" --prefix "FOTO_" --yes
+
+==============================move_duplicate_by_length==============================
+pindah file yang nama depannya mirip ke folder "THIS IS DUPLICATE"
+opsi: --length (jumlah karakter, default 50), --include-ext y/n (ikutkan ekstensi saat bandingkan)
+1. # tanya semua input (interaktif)
+python "move_duplicate_by_length.py"
+2. # langsung kasih path-nya
+python "move_duplicate_by_length.py" "D:\Folder\Target"
+3. # bandingkan 50 karakter pertama, tanpa ekstensi
+python "move_duplicate_by_length.py" --path "D:\Folder\Target" --length 50 --include-ext n
+4. # bandingkan dengan ekstensi ikut dihitung
+python "move_duplicate_by_length.py" --path "D:\Folder\Target" --length 50 --include-ext y
+5. # preview dulu
+python "move_duplicate_by_length.py" --path "D:\Folder\Target" --length 50 --dry-run
+6. # langsung pindah tanpa konfirmasi
+python "move_duplicate_by_length.py" --path "D:\Folder\Target" --length 50 --yes
+
+==============================generate_to_pdf==============================
+konversi gambar (PNG, JPG, BMP, GIF, WEBP) dan TXT jadi PDF
+1. # konversi satu file langsung
+python "generate_to_pdf.py" "D:\Folder\Target\foto.jpg"
+2. # konversi satu file pakai flag
+python "generate_to_pdf.py" --path "D:\Folder\Target\foto.jpg"
+3. # konversi semua file di folder
+python "generate_to_pdf.py" --path "D:\Folder\Target" --batch
+4. # preview dulu tanpa konversi beneran
+python "generate_to_pdf.py" --path "D:\Folder\Target" --batch --dry-run
